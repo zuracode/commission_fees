@@ -18,7 +18,7 @@ yarn test
 
 ## P.S
 
-if json file name or file will be changed, should be change also command to run ru project properly
+if json file name or file will be changed, should be changed also command to run project properly
 
 ```shell
 node app.js [filename].json
