@@ -10,15 +10,15 @@ class CashIn extends ApiConfigs {
     async proceed(cashInData) {
         const config = await this.getConfig(CASH_IN_API_URL)
 
-        if (cashInData.operation.amount <= config.max.amount) {
-            return (0).toFixed(2)
+        const operationFee = ExtendedMath.setValue(cashInData.operation.amount)
+            .percent(config.percents)
+            .getValue()
+
+        if (operationFee >= config.max.amount) {
+            return config.max.amount.toFixed(2)
         }
 
-        return ExtendedMath.setValue(cashInData.operation.amount)
-            .percent(config.percents)
-            .roundUp()
-            .getValue()
-            .toFixed(2)
+        return operationFee.toFixed(2)
     }
 }
 
